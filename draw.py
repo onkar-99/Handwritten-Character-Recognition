@@ -46,5 +46,3 @@ yertle.turtlesize(stretch_wid=2, stretch_len=2, outline=5)
 yertle.onclick(dragging)
 yertle.onrelease(dialogue, btn=1, add=None)
 screen.mainloop()
-
-#C:\Program Files\Common Files\Oracle\Java\javapath;%SystemRoot%\system32;%SystemRoot%;%SystemRoot%\System32\Wbem;%SYSTEMROOT%\System32\WindowsPowerShell\v1.0\;C:\Program Files\Skype\Phone\;C:\Program Files\GtkSharp\2.12\bin;C:\Program Files\Git\cmd
