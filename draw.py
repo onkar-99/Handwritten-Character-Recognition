@@ -4,42 +4,6 @@ from PIL import Image
 from tkinter import messagebox
 import cv2
 import numpy as np
-
-def preprocess():
-    img = cv2.imread("letter.jpg")
-    ## (1) Convert to gray, and threshold
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    th, threshed = cv2.threshold(gray, 240, 255, cv2.THRESH_BINARY_INV)
-
-    ## (2) Morph-op to remove noise
-    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (11,11))
-    morphed = cv2.morphologyEx(threshed, cv2.MORPH_CLOSE, kernel)
-
-## (3) Find the max-area contour
-    cnts = cv2.findContours(morphed, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)[-2]
-    cnt = sorted(cnts, key=cv2.contourArea)[-1]
-        ## Chnage color depth
-       
-## (4) Crop and save it
-    x,y,w,h = cv2.boundingRect(cnt)
-    dst = img[(y-10):y+(h+10), (x-10):x+(w+10)] 
-    i=cv2.resize(dst, (28, 28)) 
-    cv2.imwrite("letter.jpg", i)
-    img1 = Image.open("letter.jpg")
-    img2 = img1.convert(colors=8)
-    img2.save('letter.png', quality=90, lossless = True,mode='L')
-        #imgNew.thumbnail((2000,2000), Image.ANTIALIAS)
-        #newsize = (45, 45)
-        #width, height = imgNew.size
-        #print(width,height)
-        #cropped = imgNew.crop((169, 193, width-170, height-194))
-        #cropped.save('letter.png', quality=90, lossless = True)
-        #width, height = cropped.size
-        #print(width,height)
-        #imgNew = Image.open("letter1.png")
-        #img=imgNew.resize([32,32])
-        #img.save('letter.png', quality=90, lossless = True)
-        
 def dialogue(x,y):
     r=ctypes.windll.user32.MessageBoxW(0, "Do you wish to continue?", "Dialogue Box", 6)
     #print(r)
